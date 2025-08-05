@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+    <!-- NuGet Package Properties -->
+    <PackageId>MitchCodes.DIDynamicProxy.DotNet</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>MitchCodes</Authors>
+    <Description>A library designed to simplify the integration of dynamic proxies into .NET applications using Dependency Injection (DI) with Castle.Core IInterceptors and IAsyncInterceptors. Enables aspect-oriented programming for logging, caching, security, and other cross-cutting concerns.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MitchCodes/MitchCodes.DIDynamicProxy.DotNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MitchCodes/MitchCodes.DIDynamicProxy.DotNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>castle-core;dependency-injection;dynamic-proxy;interceptor;aop;aspect-oriented</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core.AsyncInterceptor" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
