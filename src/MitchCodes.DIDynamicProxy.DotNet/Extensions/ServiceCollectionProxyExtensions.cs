@@ -150,8 +150,8 @@ public static class ServiceCollectionProxyExtensions
         // get settings
         dynamicProxySettings ??= new DynamicProxiedServiceSettings();
 
-        // register the implementation as a singleton
-        services.AddSingleton(instance);
+        // register the implementation as a singleton by its concrete type
+        services.AddSingleton(implementationType, instance);
 
         services.RegisterDynamicProxyService<IInterface>(implementationType, ServiceLifetime.Singleton, dynamicProxySettings);
 
@@ -184,7 +184,7 @@ public static class ServiceCollectionProxyExtensions
             // Handle syncronous interceptors
 
             // get all interceptors from DI
-            var allInterceptors = provider.GetServices<IInterceptor>().ToList() ?? [];
+            var allInterceptors = provider.GetServices<IInterceptor>().ToList() ?? new List<IInterceptor>();
             var interceptors = new List<IInterceptor>();
 
             // load all global interceptors from DI
@@ -210,7 +210,7 @@ public static class ServiceCollectionProxyExtensions
             // Handle asyncronous interceptors
 
             // get all async interceptors from DI
-            var allAsyncInterceptors = provider.GetServices<IAsyncInterceptor>().ToList() ?? [];
+            var allAsyncInterceptors = provider.GetServices<IAsyncInterceptor>().ToList() ?? new List<IAsyncInterceptor>();
             var asyncInterceptors = new List<IAsyncInterceptor>();
 
             // load all global async interceptors from DI
@@ -255,13 +255,13 @@ public static class ServiceCollectionProxyExtensions
     {
         if (dynamicProxySettings != null)
         {
-            foreach (var interceptorType in dynamicProxySettings.ProxyInterceptorTypes ?? [])
+            foreach (var interceptorType in dynamicProxySettings.ProxyInterceptorTypes ?? new List<Type>())
             {
                 services.AddTransient(typeof(IInterceptor), interceptorType);
                 services.AddTransient(interceptorType);
             }
 
-            foreach (var asyncInterceptorType in dynamicProxySettings.ProxyAsyncInterceptorTypes ?? [])
+            foreach (var asyncInterceptorType in dynamicProxySettings.ProxyAsyncInterceptorTypes ?? new List<Type>())
             {
                 services.AddTransient(typeof(IAsyncInterceptor), asyncInterceptorType);
                 services.AddTransient(asyncInterceptorType);

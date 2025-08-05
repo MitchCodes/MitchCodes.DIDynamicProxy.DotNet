@@ -17,7 +17,7 @@ public abstract class AbstractFunctionAttributeAsyncInterceptor<TAttribute> : IA
     public void InterceptAsynchronous(IInvocation invocation) => invocation.ReturnValue = this.InternalInterceptAsynchronous(invocation);
     public void InterceptAsynchronous<TResult>(IInvocation invocation) => invocation.ReturnValue = this.InternalInterceptAsynchronous<TResult>(invocation);
 
-    private async void InternalInterceptSynchronous(IInvocation invocation)
+    private void InternalInterceptSynchronous(IInvocation invocation)
     {
         if (invocation.MethodInvocationTarget
             .GetCustomAttributes(typeof(TAttribute), false)
